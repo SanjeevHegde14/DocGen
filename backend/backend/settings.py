@@ -1,10 +1,11 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-f9)rb6p5^6_xjqf*0rrza0^n#4#@&(6dpvbfcd&q-5@pj&6^qb'
 
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -31,6 +32,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 
@@ -47,7 +49,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "frontend_build"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,6 +91,12 @@ USE_TZ = True
 
 # ---------------- STATIC ----------------
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+frontend_static_dir = BASE_DIR / "frontend_build" / "static"
+if frontend_static_dir.exists():
+    STATICFILES_DIRS = [frontend_static_dir]
 
 
 # =====================================================
@@ -96,15 +104,17 @@ STATIC_URL = 'static/'
 # =====================================================
 
 # CORS
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 CORS_ALLOW_HEADERS = ["*"]

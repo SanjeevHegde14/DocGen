@@ -1,3 +1,13 @@
+---
+title: DocGen
+emoji: 📄
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 ## AI POWERED DOCUMET GENERATION
 DocGen is a fully offline AI-powered documentation generator that transforms programming code into structured, professional documentation using a locally running Large Language Model (LLM).
 
@@ -248,6 +258,27 @@ Paste or upload code
 Click Generate Documentation
 
 Click Export PDF / DOCX
+```
+
+## 🚀 Deploy on Hugging Face Spaces (Docker)
+```text
+1) Create a new Space (SDK: Docker)
+2) Connect GitHub repo: SanjeevHegde14/DocGen
+3) Keep branch = main
+4) Every push to GitHub auto-rebuilds the Space
+```
+
+### Optional: one-time manual push from local to Space git remote
+```text
+git remote add hf https://huggingface.co/spaces/SanjeevHegde/DocGen
+git push hf main
+```
+
+### Notes
+```text
+- Space listens on port 7860.
+- Frontend and backend are served from one container/one port.
+- API base is /api/ by default in production.
 ```
 ## ⚠️ Troubleshooting
 # Model not responding
