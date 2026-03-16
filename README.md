@@ -12,6 +12,7 @@ It includes a React frontend, Django REST backend, and Ollama (`qwen2.5-coder:7b
 - Fully local workflow (no external AI API required)
 ## Results
 ![screenshot](./assets/results1.png)
+---
 ![screenshot](./assets/results2.png)
 
 ## Tech Stack
