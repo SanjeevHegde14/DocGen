@@ -10,6 +10,9 @@ It includes a React frontend, Django REST backend, and Ollama (`qwen2.5-coder:7b
 - Export results as Markdown, PDF, and DOCX
 - JWT authentication and user-based document history
 - Fully local workflow (no external AI API required)
+## Results
+![screenshot](./assets/results1.png)
+![screenshot](./assets/results2.png)
 
 ## Tech Stack
 
