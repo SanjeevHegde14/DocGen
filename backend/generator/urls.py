@@ -4,6 +4,7 @@ from .views import (
     register_user, 
     get_user_info, 
     connection_status,
+    get_ollama_models,
     generate_documentation, 
     get_history, 
     delete_history, 
@@ -19,6 +20,7 @@ urlpatterns = [
     
     # System
     path("status/", connection_status),
+    path("models/", get_ollama_models),
     
     # Core
     path("generate/", generate_documentation),

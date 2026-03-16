@@ -135,6 +135,26 @@ def connection_status(request):
     return Response({"online": internet_available()})
 
 
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def get_ollama_models(request):
+    try:
+        response = requests.get("http://localhost:11434/api/tags", timeout=2)
+        if response.status_code == 200:
+            models = response.json().get("models", [])
+            model_list = [{"id": m["name"], "label": m["name"]} for m in models]
+            return Response(model_list)
+    except:
+        pass
+    
+    # Fallback if offline or error
+    return Response([
+        { "id": "phi3:mini", "label": "Fast" },
+        { "id": "qwen2.5-coder:3b", "label": "Balanced" },
+        { "id": "qwen2.5-coder:7b", "label": "Thinking" }
+    ])
+
+
 # =========================================================
 # MAIN GENERATION
 # =========================================================
